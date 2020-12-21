@@ -19,7 +19,7 @@ const GameSalesTable = ({ database }) => {
             <div className="py-8">
               <div>
                 <h2 className="text-2xl font-semibold leading-tight">
-                  Game sales
+                  Game sales table
                 </h2>
               </div>
               <div className="my-2 flex sm:flex-row flex-col">
