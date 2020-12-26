@@ -1,35 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
 
-// Componenets
-import FirstFilter from "../components/Filters/FirstFilter";
-import SecondFilter from "../components/Filters/SecondFilter";
+// Components
 import NameFilter from "../components/Filters/NameFilter";
 import SalesFilter from "../components/Filters/SalesFilter";
-import RatingFilter from "../components/Filters/RatingFilter";
 import TableHeader from "../components/TableHeader";
 import TableCell from "../components/TableCell";
 
-const GameSalesTable = ({ database }) => {
+const GameSalesTable = ({ filteredDatabase }) => {
   return (
     <>
       <div className="h-screen items-center justify-center">
-        <body className="antialiased font-sans">
+        <div className="antialiased font-sans">
           <div className="container mx-auto px-4 sm:px-8">
             <div className="py-8">
               <div>
                 <h2 className="text-2xl font-semibold leading-tight">
-                  Game sales table
+                  Game sales
                 </h2>
               </div>
               <div className="my-2 flex sm:flex-row flex-col">
                 <div className="flex flex-row mb-1 sm:mb-0">
-                  <FirstFilter />
-                  <SecondFilter />
+                  <NameFilter />
+                  <SalesFilter />
                 </div>
-                <NameFilter />
-                <SalesFilter />
-                <RatingFilter />
               </div>
               <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                 <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -38,12 +32,10 @@ const GameSalesTable = ({ database }) => {
                       <TableHeader />
                     </thead>
                     <tbody>
-                      {database.map((item) => (
-                        <tr>
+                      {filteredDatabase.map((item) => (
+                        <tr key={item.dealID}>
                           <TableCell title={item.title} />
                           <TableCell title={`$` + item.salePrice} />
-                          <TableCell title={`$` + item.normalPrice} />
-                          <TableCell title={item.dealRating} />
                         </tr>
                       ))}
                     </tbody>
@@ -52,14 +44,14 @@ const GameSalesTable = ({ database }) => {
               </div>
             </div>
           </div>
-        </body>
+        </div>
       </div>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  database: state.database,
+  filteredDatabase: state.filteredDatabase,
 });
 
 const mapDispatchToProps = {};
